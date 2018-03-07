@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/07 17:38:44 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/07 17:38:50 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void		ft_free_tab(char **tabl)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	if (tabl[i])
@@ -24,8 +36,8 @@ static int		ft_ret_freetab(char **tabl, int ret)
 
 static char		*ft_test_access(char **paths, char *cmd)
 {
-	char	*ret;
-	int		i;
+	char		*ret;
+	int			i;
 
 	i = 0;
 	if (!cmd || !paths)
@@ -45,9 +57,9 @@ static char		*ft_test_access(char **paths, char *cmd)
 	return (NULL);
 }
 
-int			extract_command(char **cmd, t_list **adr_env, char **paths)
+int				extract_command(char **cmd, t_list **adr_env, char **paths)
 {
-	char	*path;
+	char		*path;
 
 	if (!ft_strcmp(cmd[0], "env"))
 		ft_env(adr_env);
@@ -68,7 +80,7 @@ int			extract_command(char **cmd, t_list **adr_env, char **paths)
 		if ((path = ft_test_access(paths, cmd[0])))
 			ft_execve(cmd, path);
 		else
-			ft_printf("\033[31mminishell: Command not found: %s\n\033[0m", cmd[0]);
+			ft_printf("\033[31mminishell: Command not found: %s\n", cmd[0]);
 		free(path);
 	}
 	return (ft_ret_freetab(cmd, 1));

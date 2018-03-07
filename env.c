@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/07 17:38:38 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/07 17:38:42 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static char		*get_var_env(char *content)
@@ -30,7 +42,8 @@ static char		*parsing_setenv(char **cmd)
 		\nusage: setenv [Name]=[Value]\n", STDERR_FILENO);
 		return (NULL);
 	}
-	else if (!ft_strchr(cmd[1], '=') || cmd[1][0] == '=' || !(ft_strchr(cmd[1], '=') + 1))
+	else if (!ft_strchr(cmd[1], '=') || cmd[1][0] == '='\
+	|| !(ft_strchr(cmd[1], '=') + 1))
 	{
 		ft_putstr_fd("setenv: you need to give a value or a valid name.\
 		\nusage: setenv [Name]=[Value]\n", STDERR_FILENO);

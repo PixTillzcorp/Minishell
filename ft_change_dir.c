@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_change_dir.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/07 17:38:52 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/07 17:38:56 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static char		*ft_newpath(char *p, char *d)
@@ -89,7 +101,6 @@ void			ft_change_dir(t_list **adr_env, char **cmd)
 		return ;
 	old = ft_env_val(adr_env, "OLDPWD");
 	tmp = ft_give_pwd();
-	ft_printf("old = %s | tmp = %s\n", old, tmp);
 	if (!ft_strcmp(cmd[0], "-"))
 	{
 		if (chdir(old) < 0)

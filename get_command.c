@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_command.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/07 17:39:05 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/07 17:39:07 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ft_check_white_str(char *str)
@@ -17,7 +29,7 @@ static int	ft_check_white_str(char *str)
 
 static char	*ft_override(char *str, char *dest)
 {
-	int 	i;
+	int		i;
 	int		j;
 
 	j = 0;
@@ -73,7 +85,7 @@ char		**get_command_line(void)
 	while (!ft_strcmp(input, "") || ft_check_white_str(input))
 	{
 		ft_putstr("\033[32m$\033[34m> \033[36m");
-		free (input);
+		free(input);
 		if (get_next_line(STDIN_FILENO, &input) < 0)
 			return (NULL);
 	}
