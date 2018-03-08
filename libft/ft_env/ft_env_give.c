@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_env_give.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:41:39 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/08 15:41:49 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
 static char		*get_var_env(char *content)
@@ -50,19 +62,16 @@ void			ft_env_give(t_list **adr_env, char *var, char *val)
 {
 	t_list		*cpy;
 	char		*tmp;
-	
+
 	cpy = (*adr_env);
 	if (!cpy || !var || !val)
 		return ;
-	ft_printf("var = %s | val = %s\n", var, val);
 	while (cpy)
 	{
 		tmp = get_var_env(cpy->content);
 		if (!ft_strcmp(tmp, var))
 		{
-			ft_printf("|cpy-content = %s|\n", cpy->content);
 			cpy->content = ft_give(cpy->content, val);
-			ft_printf("|cpy-content = %s|\n", cpy->content);
 			if (tmp)
 				ft_memdel((void **)&tmp);
 			return ;

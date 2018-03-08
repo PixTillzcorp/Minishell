@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_retvoid_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 15:41:24 by heinfalt          #+#    #+#             */
-/*   Updated: 2018/03/08 15:41:37 by heinfalt         ###   ########.fr       */
+/*   Created: 2018/03/08 16:39:30 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/08 16:39:31 by heinfalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void			ft_env(t_list **adr_env)
+void	*ft_retvoid_free(void *data, void *ret)
 {
-	t_list		*cpy;
-
-	if (adr_env)
-	{
-		cpy = (*adr_env);
-		while (cpy)
-		{
-			ft_putendl(cpy->content);
-			cpy = cpy->next;
-		}
-	}
+	if (data)
+		ft_memdel(&data);
+	return (ret);
 }

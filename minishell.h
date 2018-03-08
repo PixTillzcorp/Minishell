@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:32:29 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/08 15:32:32 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -16,7 +28,8 @@ typedef struct stat		t_stat;
 typedef struct winsize	t_ws;
 
 char					**get_command_line(void);
-int						extract_command(char **cmd, t_list **adr_env, char **path);
+int						extract_command(char **cmd, t_list **adr_env,\
+						char **path);
 int						ft_is_builtin(char *str);
 
 void					ft_change_dir(t_list **adr_env, char **cmd);

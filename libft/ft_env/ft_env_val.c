@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_env_val.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/08 15:41:53 by heinfalt          #+#    #+#             */
+/*   Updated: 2018/03/08 15:42:12 by heinfalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/libft.h"
 
 static char		*get_var_env(char *content)
@@ -19,10 +31,10 @@ static char		*get_var_env(char *content)
 	return (ret);
 }
 
-char		*ft_env_val(t_list **adr_env, char *env_var)
+char			*ft_env_val(t_list **adr_env, char *env_var)
 {
-	t_list *cpy;
-	char	*tmp;
+	t_list		*cpy;
+	char		*tmp;
 
 	if (!adr_env || !(*adr_env))
 		return (NULL);

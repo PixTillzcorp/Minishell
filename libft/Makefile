@@ -93,7 +93,7 @@ SRCO_CONV =	ft_itoa.o ft_atoi.o ft_litoa.o ft_dbltoa.o ft_ulitoa.o			\
 
 SRCO_OTHR =	ft_charswap.o ft_pow.o ft_swap.o ft_wstrlen.o ft_wcharlen.o		\
 			ft_ret_free.o ft_nbrlen.o ft_retstr_free.o ft_swap_chr.o		\
-			get_next_line.o
+			get_next_line.o ft_retvoid_free.o ft_data_type.o ft_newpath.o
 
 SRCO_PRINTF =	check_wsc.o flag.o flag_flag.o ft_printf.o lenmod.o			\
 				operation.o operation_2.o other.o

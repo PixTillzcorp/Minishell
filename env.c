@@ -111,8 +111,7 @@ int				ft_unsetenv(t_list **adr_env, char **cmd)
 	save = NULL;
 	while (cpy)
 	{
-		tmp = get_var_env(cpy->content);
-		if (!ft_strcmp(tmp, cmp))
+		if (!ft_strcmp((tmp = get_var_env(cpy->content)), cmp))
 		{
 			free(cpy->content);
 			if (!save)
@@ -122,9 +121,7 @@ int				ft_unsetenv(t_list **adr_env, char **cmd)
 			ft_memdel((void **)&cpy);
 			return (ft_ret_free(cmp, ft_ret_free(tmp, 1)));
 		}
-		if (tmp)
-			ft_memdel((void **)&tmp);
-		save = cpy;
+		save = ft_retvoid_free(tmp, cpy);
 		cpy = cpy->next;
 	}
 	return (ft_ret_free(cmp, 1));
