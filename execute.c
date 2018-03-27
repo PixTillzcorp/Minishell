@@ -1,25 +1,23 @@
 #include "minishell.h"
 
-static void		ft_free_tab(char **tabl)
+static int		ft_check_exec(char *path, char *cmd)
 {
-	int			i;
+	t_stat		stats;
 
-	i = 0;
-	if (tabl[i])
+	if (!path)
+		return (0);
+	if (access(path, F_OK) == 0)
 	{
-		while (tabl[i])
-			ft_memdel((void **)&tabl[i++]);
-		ft_memdel((void **)&tabl[i]);
-		free(tabl);
-		tabl = NULL;
+		if (stat(path, &stats) < 0)
+			exit(EXIT_FAILURE);
+		if (ft_data_type(stats.st_mode & S_IFMT) == 'd')
+			return (ft_error_type(path, cmd, "ISDIR"));
+		if (access(path, X_OK) != 0)
+			return (ft_error_type(path, cmd, "PERM"));
+		else
+			return (1);
 	}
-}
-
-static int		ft_ret_freetab(char **tabl, int ret)
-{
-	if (tabl)
-		ft_free_tab(tabl);
-	return (ret);
+	return (ft_error_type(path, cmd, "NOFORD"));
 }
 
 static char		*ft_test_access(char **paths, char *cmd)
@@ -93,7 +91,10 @@ int				extract_command(char **cmd, t_list **adr_env, char **paths)
 		if ((path = ft_test_access(paths, cmd[0])))
 			ft_execve(cmd, path, ft_envtotab(adr_env));
 		else
-			ft_execve(cmd, ft_strdup(cmd[0]), ft_envtotab(adr_env));
+		{
+			if (ft_check_exec(cmd[0], "minishell"))
+				ft_execve(cmd, ft_strdup(cmd[0]), ft_envtotab(adr_env));
+		}
 	}
 	return (ft_ret_freetab(cmd, 1));
 }

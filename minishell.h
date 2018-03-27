@@ -31,13 +31,16 @@ char					**get_command_line(void);
 int						extract_command(char **cmd, t_list **adr_env,\
 						char **path);
 int						ft_is_builtin(char *str);
+int						ft_check_path(char *path, char *cmd);
 
 void					ft_change_dir(t_list **adr_env, char **cmd);
 void					ft_printf_working_dir(void);
 void					ft_execve(char **cmd, char *path, char **envp);
 void					ft_echo(char **cmd);
+char					*ft_give_pwd(void);
 
 void					ft_error(char *cmd, char *type);
+int						ft_error_type(char *path, char *cmd, char *type);
 
 t_list					*ft_clone_env(void);
 void					ft_env(t_list **adr_env);

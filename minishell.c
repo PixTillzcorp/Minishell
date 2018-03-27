@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-static void		ft_free_tab(char **tabl)
-{
-	int			i;
-
-	i = 0;
-	if (tabl[i])
-	{
-		while (tabl[i])
-			ft_memdel((void **)&tabl[i++]);
-		ft_memdel((void **)&tabl[i]);
-		free(tabl);
-		tabl = NULL;
-	}
-}
-
 static void		ft_bzero_free(void *s, size_t n)
 {
 	size_t		i;

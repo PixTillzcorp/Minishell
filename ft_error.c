@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+int			ft_error_type(char *path, char *cmd, char *type)
+{
+	ft_putstr_fd("\033[31m", 2);
+	ft_putstr_fd(cmd, 2);
+	if (!ft_strcmp(type, "NODIR"))
+		ft_putstr_fd(": Not a directory: ", 2);
+	else if (!ft_strcmp(type, "ISDIR"))
+		ft_putstr_fd(": This is a directory: ", 2);
+	else if (!ft_strcmp(type, "PERM"))
+		ft_putstr_fd(": Permission denied: ", 2);
+	else if (!ft_strcmp(type, "NOFORD"))
+		ft_putstr_fd(": No such file or directory: ", 2);
+	ft_putendl_fd(path, 2);
+	return (0);
+}
 
 static void	ft_cd_error(char *type)
 {

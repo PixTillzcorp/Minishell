@@ -12,6 +12,18 @@
 
 #include "../includes/libft.h"
 
+static void		empty_gen(t_list **adr_env)
+{
+	char		*tmp;
+
+	tmp = ft_give_pwd();
+	tmp = ft_strjoin_free("PWD=", tmp, 'r');
+	*adr_env = ft_lstnew(tmp, ft_strlen(tmp));
+	free(tmp);
+	ft_lst_push_back(adr_env, ft_lstnew("SHLVL=1", 7));
+	ft_lst_push_back(adr_env, ft_lstnew("_=/usr/bin/env", 14));
+}
+
 t_list			*ft_envclone(char **environ)
 {
 	t_list		*env;
@@ -20,16 +32,21 @@ t_list			*ft_envclone(char **environ)
 	i = 0;
 	if (!environ)
 		return (NULL);
-	while (environ[i])
+	else if (environ[0] == NULL)
+		empty_gen(&env);
+	else
 	{
-		if (!i)
-			env = ft_lstnew(environ[i], ft_strlen(environ[i]));
-		else
+		while (environ[i])
 		{
-			ft_lst_push_back(&env, ft_lstnew(environ[i],\
-			ft_strlen(environ[i])));
+			if (!i)
+				env = ft_lstnew(environ[i], ft_strlen(environ[i]));
+			else
+			{
+				ft_lst_push_back(&env, ft_lstnew(environ[i],\
+				ft_strlen(environ[i])));
+			}
+			i++;
 		}
-		i++;
 	}
 	return (env);
 }
