@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/07 17:38:21 by heinfalt          #+#    #+#             */
-/*   Updated: 2018/03/07 17:38:31 by heinfalt         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 void			ft_printf_working_dir(void)
@@ -24,12 +12,26 @@ void			ft_printf_working_dir(void)
 	free(buff);
 }
 
-void			ft_execve(char **cmd, char *path)
+void			ft_execve(char **cmd, char *path, char **envp)
 {
 	int			shell;
+	int			i;
 
+	i = 0;
 	if ((shell = fork()) == 0)
-		execve(path, cmd, NULL);
-	else
+	{
+		if (execve(path, cmd, envp) == -1)
+		{
+			ft_printf("\033[31mminishell: Command not found:%s\n", cmd[0]);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else if (shell > 0)
 		wait(NULL);
+	else
+		ft_putstr_fd("fork error.\n", 2);
+	if (envp)
+		free(envp);
+	if (path)
+		free(path);
 }

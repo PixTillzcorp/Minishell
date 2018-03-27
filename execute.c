@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/07 17:38:44 by heinfalt          #+#    #+#             */
-/*   Updated: 2018/03/07 17:38:50 by heinfalt         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 static void		ft_free_tab(char **tabl)
@@ -57,6 +45,33 @@ static char		*ft_test_access(char **paths, char *cmd)
 	return (NULL);
 }
 
+static char		**ft_envtotab(t_list **adr_env)
+{
+	t_list		*cpy;
+	char		**ret;
+	int			i;
+
+	i = 0;
+	if (!(cpy = (*adr_env)))
+		return (NULL);
+	while (cpy)
+	{
+		i++;
+		cpy = cpy->next;
+	}
+	if (!(ret = (char **)ft_memalloc(sizeof(char *) * (i + 1))))
+		return (NULL);
+	i = 0;
+	if (!(cpy = (*adr_env)))
+		return (NULL);
+	while (cpy)
+	{
+		ret[i++] = (cpy->content);
+		cpy = cpy->next;
+	}
+	return (ret);
+}
+
 int				extract_command(char **cmd, t_list **adr_env, char **paths)
 {
 	char		*path;
@@ -67,8 +82,6 @@ int				extract_command(char **cmd, t_list **adr_env, char **paths)
 		ft_setenv(adr_env, cmd);
 	else if (!ft_strcmp(cmd[0], "unsetenv"))
 		ft_unsetenv(adr_env, cmd);
-	else if (!ft_strcmp(cmd[0], "pwd"))
-		ft_printf_working_dir();
 	else if (!ft_strcmp(cmd[0], "cd"))
 		ft_change_dir(adr_env, cmd + 1);
 	else if (!ft_strcmp(cmd[0], "echo"))
@@ -78,10 +91,9 @@ int				extract_command(char **cmd, t_list **adr_env, char **paths)
 	else if (adr_env)
 	{
 		if ((path = ft_test_access(paths, cmd[0])))
-			ft_execve(cmd, path);
+			ft_execve(cmd, path, ft_envtotab(adr_env));
 		else
-			ft_printf("\033[31mminishell: Command not found: %s\n", cmd[0]);
-		free(path);
+			ft_execve(cmd, ft_strdup(cmd[0]), ft_envtotab(adr_env));
 	}
 	return (ft_ret_freetab(cmd, 1));
 }

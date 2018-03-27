@@ -51,9 +51,8 @@ int				main(int argc, char **argv, char **environ)
 	argv = NULL;
 	done = 1;
 	if (argc != 1)
-		return (0);
+		return (1);
 	env = ft_envclone(environ);
-	ft_putfile("minishell-heinfalt.txt");
 	while (done)
 	{
 		path = ft_env_val(&env, "PATH");
@@ -65,7 +64,5 @@ int				main(int argc, char **argv, char **environ)
 	}
 	if (env)
 		ft_lstdel(&env, ft_bzero_free);
-	while (1)
-		done = 1;
 	return (0);
 }

@@ -53,21 +53,36 @@ static int		ft_check_path(char *path, char *cmd)
 
 static void		ft_swap_dir(t_list **adr_env, char *tmp, char *old)
 {
-	if (chdir(old) < 0)
-			exit(EXIT_FAILURE);
-	ft_env_give(adr_env, "PWD", old);
-	ft_env_give(adr_env, "OLDPWD", tmp);
+	if (!tmp || !old)
+	{
+		ft_error("cd", "-NULL");
+		return ;
+	}
+	if (ft_check_path(old, "cd") && ft_check_path(tmp, "cd"))
+	{
+		if (chdir(old) < 0)
+				exit(EXIT_FAILURE);
+		ft_env_give(adr_env, "PWD", old);
+		ft_env_give(adr_env, "OLDPWD", tmp);
+	}
 }
 
 static void		ft_go_home(t_list **adr_env, char *tmp)
 {
 	char		*home;
 
-	home = ft_env_val(adr_env, "HOME");
-	if (chdir(home) < 0)
+	if (!(home = ft_env_val(adr_env, "HOME")))
+	{
+		ft_error("cd", "HOME");
+		return ;
+	}
+	if (ft_check_path(home, "cd"))
+	{
+		if (chdir(home) < 0)
 			exit(EXIT_FAILURE);
-	ft_env_give(adr_env, "PWD", home);
-	ft_env_give(adr_env, "OLDPWD", tmp);
+		ft_env_give(adr_env, "PWD", home);
+		ft_env_give(adr_env, "OLDPWD", tmp);
+	}
 	free(home);
 }
 
@@ -77,8 +92,11 @@ void			ft_change_dir(t_list **adr_env, char **cmd)
 	char		*tmp;
 	char		*old;
 
-	if (!cmd || !cmd[0])
+	if (!cmd || !cmd[0] || cmd[1])
+	{
+		ft_putstr_fd("cd: Wrong number of arguments\n", 2);
 		return ;
+	}
 	old = ft_env_val(adr_env, "OLDPWD");
 	tmp = ft_give_pwd();
 	if (!ft_strcmp(cmd[0], "-"))

@@ -25,10 +25,10 @@ LIB_PATH = libft/
 CC = gcc
 
 SRCC =	execute.c env.c builtins.c ft_change_dir.c ft_echo.c get_command.c	\
-		minishell.c
+		minishell.c ft_error.c
 
 SRCO =	execute.o env.o builtins.o ft_change_dir.o ft_echo.o get_command.o	\
-		minishell.o
+		minishell.o ft_error.o
 
 LIB_SRC = libft/libft.a
 

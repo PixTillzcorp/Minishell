@@ -34,9 +34,10 @@ int						ft_is_builtin(char *str);
 
 void					ft_change_dir(t_list **adr_env, char **cmd);
 void					ft_printf_working_dir(void);
-void					ft_execve(char **cmd, char *path);
-void					ft_clear(void);
+void					ft_execve(char **cmd, char *path, char **envp);
 void					ft_echo(char **cmd);
+
+void					ft_error(char *cmd, char *type);
 
 t_list					*ft_clone_env(void);
 void					ft_env(t_list **adr_env);

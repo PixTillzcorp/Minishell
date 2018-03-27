@@ -18,6 +18,8 @@ t_list			*ft_envclone(char **environ)
 	int			i;
 
 	i = 0;
+	if (!environ)
+		return (NULL);
 	while (environ[i])
 	{
 		if (!i)

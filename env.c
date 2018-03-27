@@ -85,10 +85,10 @@ int				ft_setenv(t_list **adr_env, char **cmd)
 		tmp = get_var_env(cpy->content);
 		if (!ft_strcmp(tmp, cmp))
 		{
-			cpy->content = cmd[1];
-			if (tmp)
-				ft_memdel((void **)&tmp);
-			return (ft_ret_free(cmp, 1));
+			if (cpy->content)
+				free(cpy->content);
+			cpy->content = ft_strdup(cmd[1]);
+			return (ft_ret_free(cmp, ft_ret_free(tmp, 1)));
 		}
 		if (tmp)
 			ft_memdel((void **)&tmp);
