@@ -46,7 +46,9 @@ char			*ft_env_val(t_list **adr_env, char *env_var)
 		{
 			free(tmp);
 			tmp = ft_strdup(ft_strchr(cpy->content, '=') + 1);
-			return ((!ft_strcmp(tmp, "") ? NULL : tmp));
+			if (!ft_strcmp(tmp, ""))
+				return (ft_retstr_free(tmp, NULL));
+			return (tmp);
 		}
 		else
 			cpy = cpy->next;
