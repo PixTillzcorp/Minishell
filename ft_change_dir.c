@@ -6,7 +6,7 @@
 /*   By: heinfalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:38:52 by heinfalt          #+#    #+#             */
-/*   Updated: 2018/03/07 17:38:56 by heinfalt         ###   ########.fr       */
+/*   Updated: 2018/03/28 17:01:06 by heinfalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		ft_swap_dir(t_list **adr_env, char *tmp, char *old)
 	if (ft_check_path(old, "cd") && ft_check_path(tmp, "cd"))
 	{
 		if (chdir(old) < 0)
-				exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		ft_env_give(adr_env, "PWD", old);
 		ft_env_give(adr_env, "OLDPWD", tmp);
 	}
